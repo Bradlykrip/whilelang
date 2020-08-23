@@ -14,13 +14,13 @@ object Language {
   sealed trait Expression { def value = Semantics.value(this) }
   case object Read extends Expression
   case class Id(id: String) extends Expression
-  case class Integer(exp: Int) extends Expression
+  case class Integer(@specialized(Int) exp: Int) extends Expression
   case class ExpSum(lhs: Expression, rhs: Expression) extends Expression
   case class ExpSub(lhs: Expression, rhs: Expression) extends Expression
   case class ExpMult(lhs: Expression, rhs: Expression) extends Expression
 
   sealed trait Bool { def value = Semantics.value(this) }
-  case class Boole(b: Boolean) extends Bool
+  case class Boole(@specialized(Boolean) b: Boolean) extends Bool
   case class ExpEqual(lhs: Expression, rhs: Expression) extends Bool
   case class ExpLessOrEqualThan(lhs: Expression, rhs: Expression) extends Bool
   case class Not(b: Bool) extends Bool
